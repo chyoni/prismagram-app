@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import constants from "../../constants";
 import AuthButton from "../../components/AuthButton";
+import { Text } from "react-native";
 
 const View = styled.View`
   justify-content: center;

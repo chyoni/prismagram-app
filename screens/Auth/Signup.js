@@ -8,6 +8,7 @@ import { useMutation } from "react-apollo-hooks";
 import { CREATE_ACCOUNT } from "./AuthQueries";
 import constants from "../../constants";
 import * as Facebook from "expo-facebook";
+import { Google } from "expo";
 
 const View = styled.View`
   justify-content: center;
@@ -97,12 +98,7 @@ export default ({ navigation }) => {
           first_name,
           last_name
         } = await response.json();
-        console.log(facebookEmail, firstName, lastName);
-        email.setValue(facebookEmail);
-        firstName.setValue(first_name);
-        lastName.setValue(last_name);
-        const [facebookUsername] = facebookEmail.split("@");
-        username.setValue(facebookUsername);
+        updateFormData(facebookEmail, first_name, last_name);
         setLoading(false);
       } else {
         // type === 'cancel'
@@ -110,6 +106,45 @@ export default ({ navigation }) => {
     } catch ({ message }) {
       alert(`Facebook Login Error: ${message}`);
     }
+  };
+
+  const googleLogin = async () => {
+    const GOOGLE_ID =
+      "73037815285-7uijp1cjng0tq53cd5ukumc87o3m083i.apps.googleusercontent.com";
+    try {
+      setLoading(true);
+      const result = await Google.logInAsync({
+        iosClientId: GOOGLE_ID,
+        scopes: ["profile", "email"]
+      });
+
+      if (result.type === "success") {
+        console.log(result);
+        const user = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+          headers: { Authorization: `Bearer ${result.accessToken}` }
+        });
+        const {
+          email: googleEmail,
+          family_name,
+          given_name
+        } = await user.json();
+        updateFormData(googleEmail, family_name, given_name);
+      } else {
+        return { cancelled: true };
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateFormData = (socialEmail, socialFirstName, socialLastName) => {
+    email.setValue(socialEmail);
+    firstName.setValue(socialFirstName);
+    lastName.setValue(socialLastName);
+    const [socialUsername] = socialEmail.split("@");
+    username.setValue(socialUsername);
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -149,7 +184,13 @@ export default ({ navigation }) => {
           <AuthButton
             bgColor={"#3F82F8"}
             onPress={facebookLogin}
-            text={"페이스북으로 연동"}
+            text={"Facebook(으)로 연동"}
+            loading={false}
+          />
+          <AuthButton
+            bgColor={"#ED4956"}
+            onPress={googleLogin}
+            text={"Google(으)로 연동"}
             loading={false}
           />
         </FBContainer>
