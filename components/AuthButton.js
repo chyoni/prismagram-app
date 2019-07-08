@@ -7,7 +7,11 @@ import constants from "../constants";
 const Touchable = styled.TouchableOpacity``;
 const Container = styled.View`
   background-color: ${props =>
-    props.loading ? "rgba(0,0,0,0.1)" : props.theme.blueColor};
+    props.loading
+      ? "rgba(0,0,0,0.1)"
+      : props.state === "confirm"
+      ? props.theme.redColor
+      : props.theme.blueColor};
   padding: 10px;
   width: ${constants.width / 2};
   border-radius: 5px;
@@ -19,10 +23,10 @@ const Text = styled.Text`
   text-align: center;
   font-weight: 600;
 `;
-const AuthButton = ({ text, onPress, loading = false }) => {
+const AuthButton = ({ text, onPress, loading = false, state = "" }) => {
   return (
     <Touchable disabled={loading} onPress={onPress}>
-      <Container loading={loading}>
+      <Container loading={loading} state={state}>
         {loading ? (
           <ActivityIndicator size={"small"} color={"white"} />
         ) : (
@@ -36,7 +40,8 @@ const AuthButton = ({ text, onPress, loading = false }) => {
 AuthButton.propTypes = {
   text: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  state: PropTypes.string
 };
 
 export default AuthButton;

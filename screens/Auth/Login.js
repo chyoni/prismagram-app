@@ -37,10 +37,9 @@ export default ({ navigation }) => {
       const {
         data: { requestSecret }
       } = await requestSecretMutation();
-      console.log(requestSecret);
       if (requestSecret) {
         Alert.alert("시크릿 키를 보냈습니다 이메일을 확인해주세요 🙂");
-        navigation.navigate("Confirm");
+        navigation.navigate("Confirm", { email: value });
         return;
       } else {
         Alert.alert("해당 이메일 사용자가 존재하지 않습니다 🙄");
