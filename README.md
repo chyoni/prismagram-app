@@ -14,7 +14,7 @@
 
 # AppLoading 이라는 컴포넌트를 expo패키지에서 가져옴 얘는 필요한 것들이 로딩이 다되기전에 띄워주는 컴포넌트임 우리가 fontend에서 했던 Loader랑 같은거라 생각하면 됨 얘는 가장 맨처음 Mount되는 컴포넌트에서만 실행이 가능하다고 써져있음 즉, App.js에서만 사용가능하단 얘기임
 
-#useEffect는 componentDidMount랑 똑같은거라고 보면됨 즉 컴포넌트들이 마운드될때 실행되는 함수임
+# useEffect는 componentDidMount랑 똑같은거라고 보면됨 즉 컴포넌트들이 마운드될때 실행되는 함수임
 
 # 그래서 preLoad를 useEffect가 실행시키면 앱이실행될때 가장먼저 실행되는 함수는 useEffect고 그안에 preLoad라는 함수가 될거임 그 preLoad는 async await이여야함 로딩해야하니까 기다려줘야하니까 그 안에 우리는 Font를 로딩할거임 그 Font는 Ionicons.Font 임 모든 로딩을 다하면 state를 사용해서 loading state를 바꿔주면 됨
 

@@ -1,11 +1,11 @@
-import { createAppContainer, createBottomTabNavigator } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation";
 import { View } from "react-native";
 import Home from "../screens/Home";
 import Search from "../screens/Search";
 import Notifications from "../screens/Notifications";
 import Profile from "../screens/Profile";
 
-const TabNavigation = createBottomTabNavigator({
+export default createBottomTabNavigator({
   Feed: {
     screen: Home,
     navigationOptions: {
@@ -16,13 +16,9 @@ const TabNavigation = createBottomTabNavigator({
   Add: {
     screen: View,
     navigationOptions: {
-      tabBarOnPress: () => {
-        console.log("Add");
-      }
+      tabBarOnPress: ({ navigation }) => navigation.navigate("PhotoNavigation")
     }
   },
   Notifications,
   Profile
 });
-
-export default createAppContainer(TabNavigation);
