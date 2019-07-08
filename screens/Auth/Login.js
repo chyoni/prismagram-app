@@ -57,7 +57,7 @@ export default ({ navigation }) => {
       <View>
         <AuthInput
           {...emailInput}
-          placeholder={"이메일"}
+          placeholder={"이메일(Email)"}
           keyboardType={"email-address"}
           returnKeyType={"send"}
           onSubmitEditing={handleLogin}
