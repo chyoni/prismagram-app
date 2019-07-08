@@ -11,6 +11,8 @@ const Container = styled.View`
       ? "rgba(0,0,0,0.1)"
       : props.state === "confirm"
       ? props.theme.redColor
+      : props.bgColor
+      ? props.bgColor
       : props.theme.blueColor};
   padding: 10px;
   width: ${constants.width / 2};
@@ -23,10 +25,16 @@ const Text = styled.Text`
   text-align: center;
   font-weight: 600;
 `;
-const AuthButton = ({ text, onPress, loading = false, state = "" }) => {
+const AuthButton = ({
+  text,
+  onPress,
+  loading = false,
+  state = "",
+  bgColor = null
+}) => {
   return (
     <Touchable disabled={loading} onPress={onPress}>
-      <Container loading={loading} state={state}>
+      <Container loading={loading} state={state} bgColor={bgColor}>
         {loading ? (
           <ActivityIndicator size={"small"} color={"white"} />
         ) : (

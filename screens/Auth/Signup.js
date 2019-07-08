@@ -6,6 +6,8 @@ import AuthInput from "../../components/AuthInput";
 import useInput from "../../hooks/useInput";
 import { useMutation } from "react-apollo-hooks";
 import { CREATE_ACCOUNT } from "./AuthQueries";
+import constants from "../../constants";
+import * as Facebook from "expo-facebook";
 
 const View = styled.View`
   justify-content: center;
@@ -13,12 +15,15 @@ const View = styled.View`
   flex: 1;
 `;
 
-const FBContainer = styled.View`
-  padding-top: 20px;
+const DivideLine = styled.View`
   border-top-width: 1px;
   border-color: ${props => props.theme.lightGreyColor};
   border-style: solid;
+  width: ${constants.width / 1.1};
+  margin-bottom: 20px;
 `;
+
+const FBContainer = styled.View``;
 
 export default ({ navigation }) => {
   const [loading, setLoading] = useState(false);
@@ -73,6 +78,39 @@ export default ({ navigation }) => {
     }
   };
 
+  const facebookLogin = async () => {
+    try {
+      setLoading(true);
+      const { type, token } = await Facebook.logInWithReadPermissionsAsync(
+        "705072043285346",
+        {
+          permissions: ["public_profile", "email"]
+        }
+      );
+      if (type === "success") {
+        // Get the user's name using Facebook's Graph API
+        const response = await fetch(
+          `https://graph.facebook.com/me?access_token=${token}&fields=id,last_name,first_name,email`
+        );
+        const {
+          email: facebookEmail,
+          first_name,
+          last_name
+        } = await response.json();
+        console.log(facebookEmail, firstName, lastName);
+        email.setValue(facebookEmail);
+        firstName.setValue(first_name);
+        lastName.setValue(last_name);
+        const [facebookUsername] = facebookEmail.split("@");
+        username.setValue(facebookUsername);
+        setLoading(false);
+      } else {
+        // type === 'cancel'
+      }
+    } catch ({ message }) {
+      alert(`Facebook Login Error: ${message}`);
+    }
+  };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View>
@@ -106,10 +144,12 @@ export default ({ navigation }) => {
           text={"회원가입"}
           loading={loading}
         />
+        <DivideLine />
         <FBContainer>
           <AuthButton
-            onPress={() => null}
-            text={"페이스북으로 로그인"}
+            bgColor={"#3F82F8"}
+            onPress={facebookLogin}
+            text={"페이스북으로 연동"}
             loading={false}
           />
         </FBContainer>
