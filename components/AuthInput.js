@@ -21,7 +21,7 @@ const AuthInput = ({
   autoCapitalize = "none",
   returnKeyType = "done",
   onChange,
-  onEndEditing = () => null,
+  onSubmitEditing = () => null,
   autoCorrect = true
 }) => {
   return (
@@ -32,7 +32,7 @@ const AuthInput = ({
         keyboardType={keyboardType}
         returnKeyType={returnKeyType}
         value={value}
-        onEndEditing={onEndEditing}
+        onSubmitEditing={onSubmitEditing}
         placeholder={placeholder}
         autoCorrect={autoCorrect}
       />
@@ -54,7 +54,7 @@ AuthInput.propTypes = {
   autoCapitalize: PropTypes.oneOf(["none", "sentences", "words", "characters"]),
   onChange: PropTypes.func.isRequired,
   returnKeyType: PropTypes.oneOf(["done", "go", "next", "search", "send"]),
-  onEndEditing: PropTypes.func,
+  onSubmitEditing: PropTypes.func,
   autoCorrect: PropTypes.bool
 };
 
