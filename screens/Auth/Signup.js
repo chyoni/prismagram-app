@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Ionicons } from "@expo/vector-icons";
 import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import AuthButton from "../../components/AuthButton";
 import AuthInput from "../../components/AuthInput";
@@ -9,6 +10,7 @@ import { CREATE_ACCOUNT } from "./AuthQueries";
 import constants from "../../constants";
 import * as Facebook from "expo-facebook";
 import { Google } from "expo";
+import styles from "../../styles";
 
 const View = styled.View`
   justify-content: center;
@@ -24,7 +26,20 @@ const DivideLine = styled.View`
   margin-bottom: 20px;
 `;
 
-const FBContainer = styled.View``;
+const SocialContainer = styled.View``;
+
+const SocialLink = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const Text = styled.Text`
+  margin-left: 7px;
+  color: ${props =>
+    props.type === "google" ? props.theme.redColor : props.theme.darkBlueColor};
+`;
 
 export default ({ navigation }) => {
   const [loading, setLoading] = useState(false);
@@ -119,7 +134,6 @@ export default ({ navigation }) => {
       });
 
       if (result.type === "success") {
-        console.log(result);
         const user = await fetch("https://www.googleapis.com/userinfo/v2/me", {
           headers: { Authorization: `Bearer ${result.accessToken}` }
         });
@@ -180,20 +194,20 @@ export default ({ navigation }) => {
           loading={loading}
         />
         <DivideLine />
-        <FBContainer>
-          <AuthButton
-            bgColor={"#3F82F8"}
-            onPress={facebookLogin}
-            text={"Facebook(으)로 연동"}
-            loading={false}
-          />
-          <AuthButton
-            bgColor={"#ED4956"}
-            onPress={googleLogin}
-            text={"Google(으)로 연동"}
-            loading={false}
-          />
-        </FBContainer>
+        <SocialContainer>
+          <SocialLink onPress={googleLogin}>
+            <Ionicons name={"logo-google"} color={styles.redColor} size={26} />
+            <Text type={"google"}>Google 연동하기</Text>
+          </SocialLink>
+          <SocialLink onPress={facebookLogin}>
+            <Ionicons
+              name={"logo-facebook"}
+              color={styles.darkBlueColor}
+              size={26}
+            />
+            <Text type={"facebook"}>Facebook 연동하기</Text>
+          </SocialLink>
+        </SocialContainer>
       </View>
     </TouchableWithoutFeedback>
   );
