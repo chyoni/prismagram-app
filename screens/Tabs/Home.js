@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Loader from "../../components/Loader";
+import { useQuery } from "react-apollo-hooks";
+import { FEED_QUERY } from "./TabsQueries";
 
 const View = styled.View`
   justify-content: center;
@@ -10,8 +12,10 @@ const View = styled.View`
 
 const Text = styled.Text``;
 
-export default ({ navigation }) => (
-  <View>
-    <Loader />
-  </View>
-);
+export default ({ navigation }) => {
+  const { data, loading } = useQuery(FEED_QUERY);
+  if (!loading) {
+    console.log(data);
+  }
+  return <View>{loading ? <Loader /> : null}</View>;
+};
