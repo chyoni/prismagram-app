@@ -12,6 +12,7 @@ import MessageLink from "../components/MessageLink";
 import NavIcon from "../components/NavIcon";
 import Icon from "react-native-vector-icons/FontAwesome";
 import IconHome from "react-native-vector-icons/MaterialCommunityIcons";
+import { stackStyles } from "./config";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator({
@@ -19,7 +20,7 @@ const stackFactory = (initialRoute, customConfig) =>
       screen: initialRoute,
       navigationOptions: {
         ...customConfig,
-        headerStyle: { backgroundColor: "#FAFAFA" }
+        headerStyle: { ...stackStyles }
       }
     }
   });
@@ -34,7 +35,7 @@ export default createBottomTabNavigator(
           <Image
             style={{ height: 35 }}
             resizeMode={"contain"}
-            source={require("../assets/logo.png")}
+            source={require("../assets/greyLogo.png")}
           />
         )
       }),
