@@ -10,9 +10,10 @@ const View = styled.View`
 const Text = styled.Text``;
 
 export default ({ navigation }) => {
+  console.log(navigation.getParam("postId"));
   return (
     <View>
-      <Text>Profile</Text>
+      <Text>PostComment</Text>
     </View>
   );
 };

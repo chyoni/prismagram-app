@@ -2,13 +2,13 @@ import { createAppContainer, createStackNavigator } from "react-navigation";
 import TabNavigation from "./TabNavigation";
 import PhotoNavigation from "./PhotoNavigation";
 import MessageNavigation from "./MessageNavigation";
-import { stackStyles } from "./config";
-
+import PostNavigation from "./PostNavigation";
 const MainNavigation = createStackNavigator(
   {
     TabNavigation,
     PhotoNavigation,
-    MessageNavigation
+    MessageNavigation,
+    PostNavigation
   },
   {
     headerMode: "none",

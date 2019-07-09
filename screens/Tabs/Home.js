@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ScrollView, RefreshControl } from "react-native";
-import Post from "../../components/Post";
+import Feed from "../../components/Feed";
 import styled from "styled-components";
 import Loader from "../../components/Loader";
 import { useQuery } from "react-apollo-hooks";
@@ -27,6 +27,7 @@ export default ({ navigation }) => {
       setRefreshing(false);
     }
   };
+
   return (
     <ScrollView
       refreshControl={
@@ -34,11 +35,21 @@ export default ({ navigation }) => {
       }
     >
       {loading ? (
-        <Loader />
+        <View>
+          <Loader />
+        </View>
       ) : (
         data &&
         data.seeFeed &&
-        data.seeFeed.map(post => <Post key={post.id} {...post} />)
+        data.seeFeed.map(post => (
+          <Feed
+            goToPostComment={() =>
+              navigation.navigate("PostComment", { postId: post.id })
+            }
+            key={post.id}
+            {...post}
+          />
+        ))
       )}
     </ScrollView>
   );
