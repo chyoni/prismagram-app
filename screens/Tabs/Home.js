@@ -27,7 +27,6 @@ export default ({ navigation }) => {
       setRefreshing(false);
     }
   };
-
   return (
     <ScrollView
       refreshControl={

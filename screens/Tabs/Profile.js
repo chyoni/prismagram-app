@@ -1,5 +1,9 @@
 import React from "react";
+import { ScrollView } from "react-native";
 import styled from "styled-components";
+import Loader from "../../components/Loader";
+import { useQuery } from "react-apollo-hooks";
+import { ME } from "./TabsQueries";
 
 const View = styled.View`
   justify-content: center;
@@ -10,9 +14,15 @@ const View = styled.View`
 const Text = styled.Text``;
 
 export default ({ navigation }) => {
+  const { data, loading } = useQuery(ME);
+  console.log(data, loading);
   return (
-    <View>
-      <Text>Profile</Text>
-    </View>
+    <ScrollView>
+      {loading ? (
+        <View>
+          <Loader />
+        </View>
+      ) : null}
+    </ScrollView>
   );
 };

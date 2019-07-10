@@ -1,41 +1,28 @@
 import { gql } from "apollo-boost";
+import { POST_FRAGMENT, USER_FRAGMENT } from "../../sharedQueries";
 
 export const FEED_QUERY = gql`
   {
     seeFeed {
-      id
-      location
-      caption
-      user {
-        id
-        avatar
-        username
-      }
-      files {
-        id
-        url
-      }
-      likeCount
-      isLiked
-      comments {
-        id
-        text
-        createdAt
-        user {
-          id
-          avatar
-          username
-        }
-      }
-      likes {
-        id
-        user {
-          id
-          avatar
-          username
-        }
-      }
-      createdAt
+      ...PostParts
     }
   }
+  ${POST_FRAGMENT}
+`;
+
+export const ME = gql`
+  query me {
+    me {
+      username
+    }
+  }
+`;
+
+export const GET_PROFILE = gql`
+  query seeUser($username: String!) {
+    seeUser(username: $username) {
+      ...UserParts
+    }
+  }
+  ${USER_FRAGMENT}
 `;

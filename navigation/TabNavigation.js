@@ -22,8 +22,7 @@ const stackFactory = (initialRoute, customConfig) =>
       InitialRoute: {
         screen: initialRoute,
         navigationOptions: {
-          ...customConfig,
-          headerStyle: { ...stackStyles }
+          ...customConfig
         }
       },
       DetailPost: {
@@ -41,6 +40,7 @@ const stackFactory = (initialRoute, customConfig) =>
     },
     {
       defaultNavigationOptions: {
+        headerStyle: { ...stackStyles },
         headerBackTitle: null,
         headerTintColor: "black"
       }

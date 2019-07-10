@@ -31,6 +31,7 @@ export const SEARCH = gql`
       }
       likeCount
       commentCount
+      isLiked
     }
   }
 `;

@@ -138,7 +138,9 @@ const Feed = withNavigation(
               />
             </IconItem>
           </Touchable>
-          <Touchable>
+          <Touchable
+            onPress={() => navigation.navigate("PostComment", { postId: id })}
+          >
             <IconItem>
               <EvilIcons name={"comment"} size={40} />
             </IconItem>
