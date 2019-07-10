@@ -5,14 +5,14 @@ import styled from "styled-components";
 import Loader from "../../components/Loader";
 import { useQuery } from "react-apollo-hooks";
 import { FEED_QUERY } from "./TabsQueries";
+import constants from "../../constants";
 
 const View = styled.View`
+  flex: 1;
   justify-content: center;
   align-items: center;
-  flex: 1;
+  height: ${constants.height / 2};
 `;
-
-const Text = styled.Text``;
 
 export default ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
@@ -41,15 +41,7 @@ export default ({ navigation }) => {
       ) : (
         data &&
         data.seeFeed &&
-        data.seeFeed.map(post => (
-          <Feed
-            goToPostComment={() =>
-              navigation.navigate("PostComment", { postId: post.id })
-            }
-            key={post.id}
-            {...post}
-          />
-        ))
+        data.seeFeed.map(post => <Feed key={post.id} {...post} />)
       )}
     </ScrollView>
   );

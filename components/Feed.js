@@ -73,8 +73,7 @@ const Feed = withNavigation(
     location,
     files,
     caption,
-    comments,
-    goToPostComment
+    comments
   }) => {
     const [createdTime] = createdAt.split("T");
     const [isLikedState, setIsLikedState] = useState(isLiked);
@@ -168,7 +167,9 @@ const Feed = withNavigation(
         </InfoContainer>
         <CommentsColumn>
           {comments.length > 1 ? (
-            <Touchable onPress={goToPostComment}>
+            <Touchable
+              onPress={() => navigation.navigate("PostComment", { postId: id })}
+            >
               <Text>{`댓글 ${comments.length}개 모두보기`}</Text>
             </Touchable>
           ) : null}
@@ -208,8 +209,7 @@ Feed.propTypes = {
     id: PropTypes.string.isRequired,
     avatar: PropTypes.string,
     username: PropTypes.string.isRequired
-  }).isRequired,
-  goToPostComment: PropTypes.func.isRequired
+  }).isRequired
 };
 
 export default Feed;

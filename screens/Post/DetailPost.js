@@ -12,7 +12,7 @@ const Text = styled.Text``;
 export default ({ navigation }) => {
   return (
     <View>
-      <Text>PostComment {navigation.getParam("postId")}</Text>
+      <Text>Post! {navigation.getParam("id")}</Text>
     </View>
   );
 };

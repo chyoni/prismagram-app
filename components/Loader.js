@@ -12,7 +12,7 @@ const Container = styled.View`
 export default () => {
   return (
     <Container>
-      <ActivityIndicator color={styles.blackColor} size={"large"} />
+      <ActivityIndicator color={styles.blackColor} size={"small"} />
     </Container>
   );
 };

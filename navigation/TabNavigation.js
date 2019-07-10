@@ -8,6 +8,8 @@ import Home from "../screens/Tabs/Home";
 import Search from "../screens/Tabs/Search";
 import Notifications from "../screens/Tabs/Notifications";
 import Profile from "../screens/Tabs/Profile";
+import DetailPost from "../screens/Post/DetailPost";
+import PostComment from "../screens/Post/PostComment";
 import MessageLink from "../components/MessageLink";
 import NavIcon from "../components/NavIcon";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -15,15 +17,35 @@ import IconHome from "react-native-vector-icons/MaterialCommunityIcons";
 import { stackStyles } from "./config";
 
 const stackFactory = (initialRoute, customConfig) =>
-  createStackNavigator({
-    InitialRoute: {
-      screen: initialRoute,
-      navigationOptions: {
-        ...customConfig,
-        headerStyle: { ...stackStyles }
+  createStackNavigator(
+    {
+      InitialRoute: {
+        screen: initialRoute,
+        navigationOptions: {
+          ...customConfig,
+          headerStyle: { ...stackStyles }
+        }
+      },
+      DetailPost: {
+        screen: DetailPost,
+        navigationOptions: {
+          headerTitle: "둘러보기"
+        }
+      },
+      PostComment: {
+        screen: PostComment,
+        navigationOptions: {
+          headerTitle: "댓글"
+        }
+      }
+    },
+    {
+      defaultNavigationOptions: {
+        headerBackTitle: null,
+        headerTintColor: "black"
       }
     }
-  });
+  );
 
 export default createBottomTabNavigator(
   {
