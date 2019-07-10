@@ -16,25 +16,28 @@ const Text = styled.Text``;
 
 export default ({ navigation }) => {
   const { data, loading } = useQuery(ME);
-  return (
-    <ScrollView>
-      {loading ? (
+  if (loading) {
+    return (
+      <ScrollView>
         <View>
           <Loader />
         </View>
-      ) : (
-        <UserProfile
-          id={data.me.id}
-          username={data.me.username}
-          avatar={data.me.avatar}
-          bio={data.me.bio}
-          isSelf={data.me.isSelf}
-          isFollowing={data.me.isFollowing}
-          posts={data.me.posts}
-          following={data.me.following}
-          followers={data.me.followers}
-        />
-      )}
-    </ScrollView>
-  );
+      </ScrollView>
+    );
+  } else {
+    const descPosts = data.me.posts.reverse();
+    return (
+      <UserProfile
+        id={data.me.id}
+        username={data.me.username}
+        avatar={data.me.avatar}
+        bio={data.me.bio}
+        isSelf={data.me.isSelf}
+        isFollowing={data.me.isFollowing}
+        posts={descPosts}
+        following={data.me.following}
+        followers={data.me.followers}
+      />
+    );
+  }
 };

@@ -16,8 +16,6 @@ import NavIcon from "../components/NavIcon";
 import Icon from "react-native-vector-icons/FontAwesome";
 import IconHome from "react-native-vector-icons/MaterialCommunityIcons";
 import { stackStyles } from "./config";
-import { useQuery } from "react-apollo-hooks";
-import { ME } from "../screens/Tabs/TabsQueries";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
@@ -41,7 +39,13 @@ const stackFactory = (initialRoute, customConfig) =>
         }
       },
       AnonymousProfile: {
-        screen: AnonymousProfile
+        screen: AnonymousProfile,
+        navigationOptions: {
+          headerStyle: {
+            borderBottomColor: "#FAFAFA",
+            backgroundColor: "#FAFAFA"
+          }
+        }
       }
     },
     {
@@ -129,7 +133,11 @@ export default createBottomTabNavigator(
     },
     MyProfile: {
       screen: stackFactory(MyProfile, {
-        headerTitle: "내 프로필"
+        headerTitle: "내 프로필",
+        headerStyle: {
+          borderBottomColor: "#FAFAFA",
+          backgroundColor: "#FAFAFA"
+        }
       }),
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
