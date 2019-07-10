@@ -45,7 +45,7 @@ export const POST_FRAGMENT = gql`
 `;
 
 export const USER_FRAGMENT = gql`
-  fragment UserParts on User {
+  fragment UserParts on UserProfile {
     user {
       id
       avatar
@@ -72,8 +72,6 @@ export const USER_FRAGMENT = gql`
     }
     posts {
       id
-      likeCount
-      commentCount
       files {
         url
       }

@@ -102,14 +102,26 @@ const Feed = withNavigation(
     return (
       <Container>
         <Header>
-          <Touchable>
+          <Touchable
+            onPress={() =>
+              navigation.navigate("AnonymousProfile", {
+                username: user.username
+              })
+            }
+          >
             <Image
               style={{ width: 40, height: 40, borderRadius: 20 }}
               source={{ uri: user.avatar }}
             />
           </Touchable>
           <HeaderUserColumn>
-            <Touchable>
+            <Touchable
+              onPress={() =>
+                navigation.navigate("AnonymousProfile", {
+                  username: user.username
+                })
+              }
+            >
               <Bold>{user.username}</Bold>
             </Touchable>
             <Location>{location}</Location>

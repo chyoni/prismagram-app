@@ -7,14 +7,17 @@ import { View, Image, Platform } from "react-native";
 import Home from "../screens/Tabs/Home";
 import Search from "../screens/Tabs/Search";
 import Notifications from "../screens/Tabs/Notifications";
-import Profile from "../screens/Tabs/Profile";
+import MyProfile from "../screens/Tabs/MyProfile";
 import DetailPost from "../screens/Post/DetailPost";
+import AnonymousProfile from "../screens/AnonymousProfile";
 import PostComment from "../screens/Post/PostComment";
 import MessageLink from "../components/MessageLink";
 import NavIcon from "../components/NavIcon";
 import Icon from "react-native-vector-icons/FontAwesome";
 import IconHome from "react-native-vector-icons/MaterialCommunityIcons";
 import { stackStyles } from "./config";
+import { useQuery } from "react-apollo-hooks";
+import { ME } from "../screens/Tabs/TabsQueries";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
@@ -36,6 +39,9 @@ const stackFactory = (initialRoute, customConfig) =>
         navigationOptions: {
           headerTitle: "댓글"
         }
+      },
+      AnonymousProfile: {
+        screen: AnonymousProfile
       }
     },
     {
@@ -121,8 +127,10 @@ export default createBottomTabNavigator(
         )
       }
     },
-    Profile: {
-      screen: stackFactory(Profile),
+    MyProfile: {
+      screen: stackFactory(MyProfile, {
+        headerTitle: "내 프로필"
+      }),
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
           <Icon name={focused ? "user" : "user-o"} size={28} />
