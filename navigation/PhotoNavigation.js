@@ -13,13 +13,13 @@ const PhotoTabs = createMaterialTopTabNavigator(
     SelectPhoto: {
       screen: SelectPhoto,
       navigationOptions: {
-        tabBarLabel: "Select"
+        tabBarLabel: "라이브러리"
       }
     },
     TakePhoto: {
       screen: TakePhoto,
       navigationOptions: {
-        tabBarLabel: "Take"
+        tabBarLabel: "사진"
       }
     }
   },
@@ -45,7 +45,7 @@ export default createStackNavigator(
     PhotoTabs: {
       screen: PhotoTabs,
       navigationOptions: {
-        header: null
+        title: "사진"
       }
     },
     UploadPhoto
