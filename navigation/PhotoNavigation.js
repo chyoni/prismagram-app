@@ -48,7 +48,12 @@ export default createStackNavigator(
         title: "사진"
       }
     },
-    UploadPhoto
+    UploadPhoto: {
+      screen: UploadPhoto,
+      navigationOptions: {
+        headerBackTitle: "취소"
+      }
+    }
   },
   {
     defaultNavigationOptions: {
