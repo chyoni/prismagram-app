@@ -1,17 +1,23 @@
-import React from "react";
-import { Image } from "react-native";
+import React, { useState } from "react";
 import styled from "styled-components";
+import DashBoard from "react-native-vector-icons/MaterialCommunityIcons";
+import Tag from "react-native-vector-icons/SimpleLineIcons";
 import PropTypes from "prop-types";
 import constants from "../constants";
 import styles from "../styles";
 import SquarePhoto from "./SquarePhoto";
+import Avatar from "./Avatar";
 
-const Container = styled.View``;
+const Container = styled.View`
+  width: ${constants.width};
+`;
 const Touchable = styled.TouchableOpacity``;
 const HeaderColumn = styled.View`
   padding: 20px;
-  width: ${constants.width};
-  height: ${constants.height / 3};
+  padding-bottom: 15px;
+  max-width: ${constants.width};
+  border-bottom-color: ${styles.superLightGreyColor};
+  border-bottom-width: 1px;
 `;
 const HorizontalBox = styled.View`
   width: 100%;
@@ -38,9 +44,12 @@ const BioText = styled.Text`
   margin-top: 20px;
 `;
 const ButtonContainer = styled.View`
-  width: ${constants.width};
   margin-top: 15px;
   flex-direction: row;
+`;
+const Button = styled.View`
+  width: ${constants.width / 2.3};
+  align-items: center;
 `;
 const EditButton = styled.View`
   width: 100%;
@@ -80,6 +89,14 @@ const UserProfile = ({
   following,
   followers
 }) => {
+  const [isGrid, setIsGrid] = useState(true);
+  const toggleGrid = () => {
+    if (isGrid) {
+      setIsGrid(false);
+    } else {
+      setIsGrid(true);
+    }
+  };
   return (
     <Container
       style={{
@@ -92,10 +109,7 @@ const UserProfile = ({
         <HorizontalBox>
           <ImageBox>
             <Touchable>
-              <Image
-                source={{ uri: avatar }}
-                style={{ width: 100, height: 100, borderRadius: 50 }}
-              />
+              <Avatar source={avatar} big={true} />
             </Touchable>
           </ImageBox>
           <VerticalBox>
@@ -158,12 +172,34 @@ const UserProfile = ({
             </Touchable>
           </ButtonContainer>
         )}
+        <ButtonContainer>
+          <Touchable onPress={toggleGrid}>
+            <Button style={{ marginRight: 10 }}>
+              <DashBoard
+                name={"view-grid"}
+                size={27}
+                color={isGrid ? styles.blackColor : styles.lightGreyColor}
+              />
+            </Button>
+          </Touchable>
+          <Touchable onPress={toggleGrid}>
+            <Button>
+              <Tag
+                name={"tag"}
+                size={27}
+                color={isGrid ? styles.lightGreyColor : styles.blackColor}
+              />
+            </Button>
+          </Touchable>
+        </ButtonContainer>
       </HeaderColumn>
-      <PhotoColumn>
-        {posts.map(post => (
-          <SquarePhoto key={post.id} {...post} />
-        ))}
-      </PhotoColumn>
+      {isGrid ? (
+        <PhotoColumn>
+          {posts.map(post => (
+            <SquarePhoto key={post.id} {...post} />
+          ))}
+        </PhotoColumn>
+      ) : null}
     </Container>
   );
 };

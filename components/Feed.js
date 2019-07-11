@@ -12,6 +12,7 @@ import styles from "../styles";
 import { withNavigation } from "react-navigation";
 import { useMutation } from "react-apollo-hooks";
 import { TOGGLE_LIKE } from "../sharedQueries";
+import Avatar from "./Avatar";
 
 const Container = styled.View``;
 const Header = styled.View`
@@ -109,10 +110,7 @@ const Feed = withNavigation(
               })
             }
           >
-            <Image
-              style={{ width: 40, height: 40, borderRadius: 20 }}
-              source={{ uri: user.avatar }}
-            />
+            <Avatar source={user.avatar} big={false} />
           </Touchable>
           <HeaderUserColumn>
             <Touchable

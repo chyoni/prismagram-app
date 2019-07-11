@@ -1,5 +1,5 @@
-import React from "react";
-import { ScrollView } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, RefreshControl } from "react-native";
 import styled from "styled-components";
 import { gql } from "apollo-boost";
 import { useQuery } from "react-apollo-hooks";
@@ -23,11 +23,26 @@ const GET_PROFILE = gql`
 `;
 
 const AnonymousProfilePresenter = ({ username }) => {
-  const { data, loading } = useQuery(GET_PROFILE, {
+  const [refreshing, setRefreshing] = useState(false);
+  const { data, loading, refetch } = useQuery(GET_PROFILE, {
     variables: { username }
   });
+  const onRefresh = async () => {
+    try {
+      setRefreshing(true);
+      await refetch({ variables: { username } });
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setRefreshing(false);
+    }
+  };
   return (
-    <ScrollView>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       {loading ? (
         <View>
           <Loader />
