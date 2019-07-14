@@ -6,11 +6,11 @@ import {
 import { View, Image, Platform } from "react-native";
 import Home from "../screens/Tabs/Home";
 import Search from "../screens/Tabs/Search";
-import Notifications from "../screens/Tabs/Notifications";
+import Notifications from "../screens/Tabs/Notification";
 import MyProfile from "../screens/Tabs/MyProfile";
 import DetailPost from "../screens/Post/DetailPost";
 import AnonymousProfile from "../screens/AnonymousProfile";
-import PostComment from "../screens/Post/PostComment";
+import PostLikes from "../screens/Post/PostLikes";
 import MessageLink from "../components/MessageLink";
 import NavIcon from "../components/NavIcon";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -32,10 +32,10 @@ const stackFactory = (initialRoute, customConfig) =>
           headerTitle: "둘러보기"
         }
       },
-      PostComment: {
-        screen: PostComment,
+      PostLikes: {
+        screen: PostLikes,
         navigationOptions: {
-          headerTitle: "댓글"
+          headerTitle: "좋아요"
         }
       },
       AnonymousProfile: {
@@ -113,7 +113,9 @@ export default createBottomTabNavigator(
       }
     },
     Notifications: {
-      screen: stackFactory(Notifications),
+      screen: stackFactory(Notifications, {
+        headerTitle: "내 소식"
+      }),
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
           <NavIcon

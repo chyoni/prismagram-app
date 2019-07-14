@@ -7,6 +7,7 @@ import constants from "../constants";
 import styles from "../styles";
 import SquarePhoto from "./SquarePhoto";
 import Avatar from "./Avatar";
+import FollowButton from "./FollowButton";
 
 const Container = styled.View`
   width: ${constants.width};
@@ -59,18 +60,13 @@ const EditButton = styled.View`
   padding: 6px;
   margin-top: 15px;
 `;
-const FollowButton = styled.View`
-  width: ${constants.width / 2.3};
-  background-color: ${props => props.theme.blueColor};
-  border-radius: 6px;
-  padding: 6px;
-  margin-right: 10px;
-`;
+
 const MessageButton = styled.View`
   width: ${constants.width / 2.3};
   background-color: ${props => props.theme.whiteColor};
   border: 1px solid ${props => props.theme.lightGreyColor};
   border-radius: 6px;
+  margin-left: 10px;
   padding: 6px;
 `;
 const PhotoColumn = styled.View`
@@ -109,7 +105,7 @@ const UserProfile = ({
         <HorizontalBox>
           <ImageBox>
             <Touchable>
-              <Avatar source={avatar} big={true} />
+              <Avatar source={avatar} big={"big"} />
             </Touchable>
           </ImageBox>
           <VerticalBox>
@@ -144,7 +140,8 @@ const UserProfile = ({
           </Touchable>
         ) : (
           <ButtonContainer>
-            <Touchable>
+            <FollowButton isFollowing={isFollowing} userId={id} />
+            {/*  <Touchable>
               <FollowButton>
                 <Text
                   style={{
@@ -156,7 +153,8 @@ const UserProfile = ({
                   팔로우
                 </Text>
               </FollowButton>
-            </Touchable>
+            </Touchable> */}
+
             <Touchable>
               <MessageButton>
                 <Text

@@ -110,7 +110,7 @@ const Feed = withNavigation(
               })
             }
           >
-            <Avatar source={user.avatar} big={false} />
+            <Avatar source={user.avatar} big={"small"} />
           </Touchable>
           <HeaderUserColumn>
             <Touchable
@@ -167,11 +167,19 @@ const Feed = withNavigation(
           </Touchable>
         </IconsContainer>
         <InfoContainer>
-          <Touchable>
+          <Touchable
+            onPress={() => navigation.navigate("PostLikes", { postId: id })}
+          >
             <Bold>좋아요 {likeCountState}개</Bold>
           </Touchable>
           <InfoUserCaptionColumn>
-            <Touchable>
+            <Touchable
+              onPress={() =>
+                navigation.navigate("AnonymousProfile", {
+                  username: user.username
+                })
+              }
+            >
               <Bold>{user.username}</Bold>
             </Touchable>
             <Caption>{caption}</Caption>

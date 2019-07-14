@@ -23,7 +23,10 @@ export default function App() {
       await Font.loadAsync({
         ...Ionicons.font
       });
-      await Asset.loadAsync([require("./assets/logo.png")]);
+      await Asset.loadAsync([
+        require("./assets/logo.png"),
+        require("./assets/noPhoto.jpg")
+      ]);
       const cache = new InMemoryCache();
       await persistCache({
         cache,

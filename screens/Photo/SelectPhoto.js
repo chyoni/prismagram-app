@@ -14,7 +14,22 @@ const LibraryView = styled.View`
   flex-wrap: wrap;
 `;
 
-const Text = styled.Text``;
+const Button = styled.TouchableOpacity`
+  display: flex;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 10px;
+  background-color: ${props => props.theme.blueColor};
+  text-align: center;
+  justify-content: center;
+  border-radius: 5px;
+`;
+
+const Text = styled.Text`
+  color: white;
+  font-weight: 600;
+`;
 
 export default ({ navigation }) => {
   const [loading, setLoading] = useState(true);
@@ -45,7 +60,9 @@ export default ({ navigation }) => {
       setHasPermission(false);
     }
   };
-
+  const navigateUpload = () => {
+    navigation.navigate("UploadPhoto", { photo: selected });
+  };
   useEffect(() => {
     askPermission();
   }, []);
@@ -62,6 +79,9 @@ export default ({ navigation }) => {
                 style={{ width: constants.width, height: constants.height / 2 }}
                 source={{ uri: selected.uri }}
               />
+              <Button onPress={navigateUpload}>
+                <Text>선택</Text>
+              </Button>
               <ScrollView>
                 <LibraryView>
                   {allPhotos.map(photo => (

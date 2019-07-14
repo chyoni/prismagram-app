@@ -15,6 +15,7 @@ const TextInput = styled.TextInput`
 `;
 
 const AuthInput = ({
+  className,
   value,
   placeholder,
   keyboardType = "default",
@@ -25,7 +26,7 @@ const AuthInput = ({
   autoCorrect = true
 }) => {
   return (
-    <Container>
+    <Container className={className}>
       <TextInput
         onChangeText={onChange}
         autoCapitalize={autoCapitalize}

@@ -38,6 +38,9 @@ export const POST_FRAGMENT = gql`
         id
         avatar
         username
+        isSelf
+        isFollowing
+        bio
       }
     }
     createdAt

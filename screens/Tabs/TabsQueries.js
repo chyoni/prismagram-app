@@ -44,3 +44,39 @@ export const ME = gql`
     }
   }
 `;
+
+export const ME_ONLYNAME = gql`
+  query me {
+    me {
+      username
+    }
+  }
+`;
+
+export const SEE_NOTIFICATION = gql`
+  query seeNotification($username: String!) {
+    seeNotification(username: $username) {
+      id
+      createdAt
+      from {
+        id
+        avatar
+        username
+        isFollowing
+      }
+      to {
+        id
+        avatar
+        username
+      }
+      type
+      post {
+        id
+        files {
+          id
+          url
+        }
+      }
+    }
+  }
+`;

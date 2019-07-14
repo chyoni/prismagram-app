@@ -45,13 +45,14 @@ export default createStackNavigator(
     PhotoTabs: {
       screen: PhotoTabs,
       navigationOptions: {
-        title: "사진"
+        headerTitle: "사진"
       }
     },
     UploadPhoto: {
       screen: UploadPhoto,
       navigationOptions: {
-        headerBackTitle: "취소"
+        headerTintColor: styles.blackColor,
+        headerTitle: "사진 업로드"
       }
     }
   },
@@ -59,7 +60,8 @@ export default createStackNavigator(
     defaultNavigationOptions: {
       headerStyle: {
         ...stackStyles
-      }
+      },
+      headerBackTitle: "취소"
     }
   }
 );
